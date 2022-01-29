@@ -1,0 +1,20 @@
+{ 
+    "users" : [
+    {
+        "id":"1",
+        "username":"abcd@123",
+        "pass":"abcd",
+        "gender":"male",
+        "fname":"",
+        "lname":""
+    },
+      {
+          "id":"2",
+        "username":"qwert@123",
+        "pass":"qwer",
+        "gender":"male",
+         "fname":"",
+        "lname":""
+    }
+]
+}

@@ -1,40 +1,43 @@
 $('document').ready(
     ()=>{
-        var button = $('#btn');
-         var email= $('#email').val();
-         var pwd=  $('#pwd').val();
-       console.log(button);
+        $.get("http://localhost:3000/users", (res)=> {
+            $("button").click(function(e) {
+                e.preventDefault();
+                uname=$("input[type=text]#email").val();
+                 upwd=$("input[type=password]#pwd").val();
+                // console.log(uname);
 
-       button.click(
-           (e)=>{
-               e.preventDefault();
-               $.ajax( {
-                   url:"http://myjson.dit.upm.es/api/bins/5dmb",
-                  
-                   method:"GET",
-                //    dataType:'json',
-                   success:(x)=>{
-
-                    //    console.log(x.email);
-                     JSON.stringify(x);
-                       var em = x.data.email;
-                       var pass= x.data.password;
-
-                    if(email==em && pass==pass){
-                        console.log("Login Succesfull");
+                 for(var index=0;index<res.length;index++) {
+                     console.log(res[index].username);
+                      if(uname===res[index].username && upwd===res[index].pass){
+                        console.log("match");
+                     window.location="http://127.0.0.1:5500/html/register.html";
+                        break;
                     }
-                      
-                       console.log(email);
-                   },
-
+                    else{
+                        alert("Username or password is incorrect");
+                        break;
+                    }
+                 }
                    
-               })
-           }
-       )
-      
+            })
+        }) 
+        var formData = JSON.stringify($("#myForm").serializeArray());
+        $("#formSubmit").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:"db.json",
+                data:formData,
+                success: ()=>{
+                    alert("Saved Successfully");
+                    console.log(data);
 
-
-        
+                },
+                dataType:"json",
+                contentType:"application/json"
+            })
+        })
 
     }
 
